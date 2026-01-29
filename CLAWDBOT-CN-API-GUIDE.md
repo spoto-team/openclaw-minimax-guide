@@ -198,8 +198,8 @@ export MINIMAX_CN_API_KEY="your_api_key_here"
         "api": "anthropic-messages",
         "models": [
           {
-            "id": "glm-4",
-            "name": "GLM-4 (China)",
+            "id": "glm-4.7",
+            "name": "GLM-4.7 (China)",
             "reasoning": true,
             "input": ["text"],
             "cost": {
@@ -210,14 +210,6 @@ export MINIMAX_CN_API_KEY="your_api_key_here"
             },
             "contextWindow": 128000,
             "maxTokens": 8192
-          },
-          {
-            "id": "glm-4-plus",
-            "name": "GLM-4 Plus (China)",
-            "reasoning": true,
-            "input": ["text"],
-            "contextWindow": 128000,
-            "maxTokens": 16384
           }
         ]
       }
@@ -256,8 +248,8 @@ export MINIMAX_CN_API_KEY="your_api_key_here"
         "api": "anthropic-messages",
         "models": [
           {
-            "id": "glm-4",
-            "name": "GLM-4",
+            "id": "glm-4.7",
+            "name": "GLM-4.7",
             "reasoning": true,
             "input": ["text"],
             "contextWindow": 128000,
@@ -346,7 +338,7 @@ minimax-cn/MiniMax-M2.1                    text       200k     no    yes   defau
 
 ```
 Model                                      Input      Ctx      Local Auth  Tags
-zhipu-cn/glm-4                             text       128k     no    yes   configured
+zhipu-cn/glm-4.7                             text       128k     no    yes   configured
 ```
 
 ### 4.3 检查 Gateway 状态
@@ -389,7 +381,7 @@ curl -X POST "https://openbigmodel.cn/api/coding/paas/v4/chat/completions" \
   -H "Authorization: Bearer YOUR_ZHIPU_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "glm-4",
+    "model": "glm-4.7",
     "messages": [{"role": "user", "content": "Hello"}]
   }'
 ```
@@ -516,7 +508,7 @@ HTTP 401 authentication_error: login fail
 ```bash
 /model minimax-cn/MiniMax-M2.1
 # 或
-/model zhipu-cn/glm-4
+/model zhipu-cn/glm-4.7
 ```
 
 或在配置文件中设置默认模型：
@@ -526,7 +518,7 @@ HTTP 401 authentication_error: login fail
   "agents": {
     "defaults": {
       "model": {
-        "primary": "zhipu-cn/glm-4"
+        "primary": "zhipu-cn/glm-4.7"
       }
     }
   }
@@ -556,8 +548,7 @@ HTTP 401 authentication_error: login fail
 | 服务商 | 模型 ID | 上下文窗口 | 特性 |
 |--------|---------|-----------|------|
 | MiniMax | MiniMax-M2.1 | 200k | 支持推理 |
-| 智谱 | glm-4 | 128k | 支持推理 |
-| 智谱 | glm-4-plus | 128k | 增强版 |
+| 智谱 | glm-4.7 | 128k | 支持推理 |
 
 ### 相关链接
 
