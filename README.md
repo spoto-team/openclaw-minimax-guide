@@ -4,8 +4,8 @@
 
 ## 支持的 API 服务商
 
-- **MiniMax**: https://api.minimaxi.com/anthropic
-- **智谱 AI (GLM)**: https://open.bigmodel.cn/api/coding/paas/v4
+- **MiniMax**: https://www.minimaxi.com
+- **智谱 AI (GLM)**: https://bigmodel.cn
 
 ## 快速开始
 
@@ -18,14 +18,24 @@
 ## 文档
 
 - [Clawdbot 国内 API 替换配置指南](./CLAWDBOT-CN-API-GUIDE.md)
+- [Clawdbot 局域网访问配置指南](./CLAWDBOT-LAN-ACCESS-GUIDE.md)
 
-包含以下内容：
+## 文档内容
+
+### Clawdbot 国内 API 替换配置指南
 - 前置条件检查
 - 备份与修改配置
 - MiniMax 配置示例
-- 智谱 GLM 配置示例
+- 智谱 GLM-4.7 配置示例
 - 多 API 同时配置
 - 重启与验证
+- 常见问题解答
+
+### Clawdbot 局域网访问配置指南
+- 配置 Gateway 支持局域网访问
+- 获取访问地址和 Token
+- Web UI 登录流程
+- 安全建议
 - 常见问题解答
 
 ## 系统要求
@@ -40,6 +50,7 @@ MIT License - 详见 [LICENSE](./LICENSE) 文件
 
 ## 注意事项
 
-- 请妥善保管您的 API Key
+- 请妥善保管您的 API Key 和 Token
 - 不要将 API Key 提交到版本控制系统
 - 定期检查 API 使用情况以控制成本
+- 局域网访问请注意网络安全
