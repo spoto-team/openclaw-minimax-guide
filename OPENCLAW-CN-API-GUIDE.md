@@ -1,6 +1,6 @@
-# Clawdbot 国内 API 替换配置指南
+# OpenClaw 国内 API 替换配置指南
 
-本指南帮助已安装 Clawdbot 的用户快速将 LLM API 替换为国内版本，支持 MiniMax 和智谱（GLM）两个主流国内 API。
+本指南帮助已安装 OpenClaw 的用户快速将 LLM API 替换为国内版本，支持 MiniMax 和智谱（GLM）两个主流国内 API。
 
 ## 目录
 
@@ -14,36 +14,36 @@
 
 ## 一、前置条件检查
 
-### 1.1 检查 Clawdbot 是否已安装
+### 1.1 检查 OpenClaw 是否已安装
 
 ```bash
-# 检查 clawdbot 是否在 PATH 中
-which clawdbot
+# 检查 openclaw 是否在 PATH 中
+which openclaw
 
-# 检查 clawdbot 是否正在运行
-ps aux | grep clawdbot
+# 检查 openclaw 是否正在运行
+ps aux | grep openclaw
 
 # 查看已安装版本
-clawdbot --version
+openclaw --version
 ```
 
 **预期输出示例**：
 ```
-/home/username/.npm-global/bin/clawdbot
-spoto      26852  0.0  0.1 1012732 57572 ?       Ssl  13:57   0:00 clawdbot
-Clawdbot version: 2026.1.24-3
+/home/username/.npm-global/bin/openclaw
+spoto      26852  0.0  0.1 1012732 57572 ?       Ssl  13:57   0:00 openclaw
+OpenClaw version: 2026.1.24-3
 ```
 
-### 1.2 如果未安装 Clawdbot
+### 1.2 如果未安装 OpenClaw
 
-如果系统未安装 Clawdbot，请使用官方安装脚本：
+如果系统未安装 OpenClaw，请使用官方安装脚本：
 
 ```bash
 # 官方一键安装脚本
 curl -fsSL https://molt.bot/install.sh | bash
 
 # 安装完成后运行初始化向导
-clawdbot onboard --install-daemon
+openclaw onboard --install-daemon
 ```
 
 ### 1.3 检查 Node.js 版本
@@ -56,16 +56,16 @@ node --version
 
 ### 1.4 查找配置文件位置
 
-Clawdbot 的主配置文件位于：
+OpenClaw 的主配置文件位于：
 
 ```bash
-~/.clawdbot/clawdbot.json
+~/.openclaw/openclaw.json
 ```
 
 查看当前配置：
 
 ```bash
-cat ~/.clawdbot/clawdbot.json
+cat ~/.openclaw/openclaw.json
 ```
 
 ---
@@ -77,7 +77,7 @@ cat ~/.clawdbot/clawdbot.json
 在修改之前，强烈建议备份配置文件：
 
 ```bash
-cp ~/.clawdbot/clawdbot.json ~/.clawdbot/clawdbot.json.backup
+cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.backup
 ```
 
 ### 2.2 获取 API Key
@@ -94,9 +94,9 @@ cp ~/.clawdbot/clawdbot.json ~/.clawdbot/clawdbot.json.backup
 使用文本编辑器打开配置文件：
 
 ```bash
-nano ~/.clawdbot/clawdbot.json
+nano ~/.openclaw/openclaw.json
 # 或
-vim ~/.clawdbot/clawdbot.json
+vim ~/.openclaw/openclaw.json
 ```
 
 在配置文件中添加或修改 `models.providers` 部分，具体配置见下一节。
@@ -310,13 +310,13 @@ export MINIMAX_CN_API_KEY="your_api_key_here"
 配置修改后，需要重启 Gateway 使配置生效：
 
 ```bash
-clawdbot gateway restart
+openclaw gateway restart
 ```
 
 **预期输出**：
 
 ```
-Restarted systemd service: clawdbot-gateway.service
+Restarted systemd service: openclaw-gateway.service
 ```
 
 ### 4.2 验证模型列表
@@ -324,7 +324,7 @@ Restarted systemd service: clawdbot-gateway.service
 检查配置是否成功加载：
 
 ```bash
-clawdbot models list
+openclaw models list
 ```
 
 **MiniMax 配置成功输出示例**：
@@ -344,7 +344,7 @@ zhipu-cn/glm-4.7                             text       200k     no    yes   con
 ### 4.3 检查 Gateway 状态
 
 ```bash
-clawdbot gateway status
+openclaw gateway status
 ```
 
 确认 Gateway 正常运行（状态为 running 或 active）。
@@ -352,7 +352,7 @@ clawdbot gateway status
 ### 4.4 测试模型响应
 
 ```bash
-clawdbot agent --message "Hello, are you working?" --session-id main
+openclaw agent --message "Hello, are you working?" --session-id main
 ```
 
 **预期**: 模型应返回正常的回复，说明 API 配置成功。
@@ -430,29 +430,29 @@ MissingEnvVarError: Missing env var "MINIMAX_CN_API_KEY"
 
 1. 检查配置文件语法：
    ```bash
-   cat ~/.clawdbot/clawdbot.json | jq
+   cat ~/.openclaw/openclaw.json | jq
    ```
 
 2. 检查日志：
    ```bash
-   tail -f ~/.clawdbot/logs/gateway.log
-   cat ~/.clawdbot/logs/gateway.err.log
+   tail -f ~/.openclaw/logs/gateway.log
+   cat ~/.openclaw/logs/gateway.err.log
    ```
 
 3. 使用备份恢复配置：
    ```bash
-   cp ~/.clawdbot/clawdbot.json.backup ~/.clawdbot/clawdbot.json
+   cp ~/.openclaw/openclaw.json.backup ~/.openclaw/openclaw.json
    ```
 
 4. 重启 Gateway：
    ```bash
-   clawdbot gateway stop
-   clawdbot gateway start
+   openclaw gateway stop
+   openclaw gateway start
    ```
 
 ### Q3: 模型未显示在列表中
 
-**问题**: 运行 `clawdbot models list` 但看不到配置的模型
+**问题**: 运行 `openclaw models list` 但看不到配置的模型
 
 **解决方案**:
 
@@ -461,7 +461,7 @@ MissingEnvVarError: Missing env var "MINIMAX_CN_API_KEY"
 3. 确认 API key 有效且有访问权限
 4. 重启 Gateway：
    ```bash
-   clawdbot gateway restart
+   openclaw gateway restart
    ```
 
 ### Q4: 认证失败 (HTTP 401)
@@ -487,18 +487,18 @@ HTTP 401 authentication_error: login fail
 
 1. 确认配置文件位置：
    ```bash
-   ls -la ~/.clawdbot/
+   ls -la ~/.openclaw/
    ```
 
 2. 如果配置文件不存在，运行初始化向导：
    ```bash
-   clawdbot onboard
+   openclaw onboard
    ```
 
 3. 手动创建配置文件：
    ```bash
-   mkdir -p ~/.clawdbot
-   nano ~/.clawdbot/clawdbot.json
+   mkdir -p ~/.openclaw
+   nano ~/.openclaw/openclaw.json
    ```
 
 ### Q6: 多个 Provider 如何切换使用
@@ -552,10 +552,10 @@ HTTP 401 authentication_error: login fail
 
 ### 相关链接
 
-- [Clawdbot 官方文档](https://docs.clawd.bot)
+- [OpenClaw 官方文档](https://docs.clawd.bot)
 - [MiniMax 官网](https://www.minimaxi.com)
 - [智谱 AI 官网](https://bigmodel.cn)
-- [Clawdbot GitHub](https://github.com/clawdbot/clawdbot)
+- [OpenClaw GitHub](https://github.com/openclaw/openclaw)
 
 ---
 
@@ -563,7 +563,7 @@ HTTP 401 authentication_error: login fail
 
 - 文档版本: 1.0
 - 创建日期: 2026-01-29
-- 支持的 Clawdbot 版本: 2026.1.24-3+
+- 支持的 OpenClaw 版本: 2026.1.24-3+
 - 支持的 API: MiniMax 国内版、智谱 GLM
 
 **注意**: 请妥善保管您的 API Key，不要将其提交到版本控制系统或公开分享。

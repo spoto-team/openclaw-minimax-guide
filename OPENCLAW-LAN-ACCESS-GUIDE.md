@@ -1,6 +1,6 @@
-# Clawdbot 局域网访问配置指南
+# OpenClaw 局域网访问配置指南
 
-本指南帮助用户配置 Clawdbot Web UI，使其可以通过局域网访问，方便在同一网络内的其他设备上使用 Clawdbot。
+本指南帮助用户配置 OpenClaw Web UI，使其可以通过局域网访问，方便在同一网络内的其他设备上使用 OpenClaw。
 
 ## 目录
 
@@ -14,24 +14,24 @@
 
 ## 一、前置条件
 
-### 1.1 检查 Clawdbot 安装状态
+### 1.1 检查 OpenClaw 安装状态
 
 ```bash
-# 检查 clawdbot 是否已安装
-which clawdbot
+# 检查 openclaw 是否已安装
+which openclaw
 
 # 查看已安装版本
-clawdbot --version
+openclaw --version
 ```
 
 ### 1.2 检查配置文件位置
 
-配置文件位置：`~/.clawdbot/clawdbot.json`
+配置文件位置：`~/.openclaw/openclaw.json`
 
 查看当前配置：
 
 ```bash
-cat ~/.clawdbot/clawdbot.json
+cat ~/.openclaw/openclaw.json
 ```
 
 ### 1.3 获取本机局域网 IP
@@ -55,7 +55,7 @@ ip addr show | grep -E "inet " | awk '{print $2}' | cut -d'/' -f1 | grep -v "^12
 在修改之前，强烈建议备份配置文件：
 
 ```bash
-cp ~/.clawdbot/clawdbot.json ~/.clawdbot/clawdbot.json.backup
+cp ~/.openclaw/openclaw.json ~/.openclaw/openclaw.json.backup
 ```
 
 ### 2.2 编辑配置文件
@@ -63,7 +63,7 @@ cp ~/.clawdbot/clawdbot.json ~/.clawdbot/clawdbot.json.backup
 使用文本编辑器打开配置文件：
 
 ```bash
-nano ~/.clawdbot/clawdbot.json
+nano ~/.openclaw/openclaw.json
 ```
 
 ### 2.3 修改 Gateway 配置
@@ -121,20 +121,20 @@ nano ~/.clawdbot/clawdbot.json
 保存配置后，重启 Gateway 使配置生效：
 
 ```bash
-clawdbot gateway restart
+openclaw gateway restart
 ```
 
 **预期输出**：
 
 ```
-Restarted systemd service: clawdbot-gateway.service
+Restarted systemd service: openclaw-gateway.service
 ```
 
 ### 2.5 验证 Gateway 状态
 
 ```bash
 # 检查 Gateway 运行状态
-clawdbot gateway status
+openclaw gateway status
 ```
 
 确认 Gateway 正常运行（状态为 running 或 active）。
@@ -158,7 +158,7 @@ http://<你的局域网IP>:18789/
 查看配置文件中的 token：
 
 ```bash
-grep -A2 '"token"' ~/.clawdbot/clawdbot.json
+grep -A2 '"token"' ~/.openclaw/openclaw.json
 ```
 
 或直接在配置文件中查看：
@@ -183,7 +183,7 @@ grep -A2 '"token"' ~/.clawdbot/clawdbot.json
 1. 打开浏览器，访问 `http://<你的局域网IP>:18789/`
 2. 系统会要求输入认证 Token
 3. 输入上一步获取的 Token
-4. 点击登录，进入 Clawdbot 控制界面
+4. 点击登录，进入 OpenClaw 控制界面
 
 ---
 
@@ -191,7 +191,7 @@ grep -A2 '"token"' ~/.clawdbot/clawdbot.json
 
 ### 4.1 风险说明
 
-⚠️ **重要提醒**：启用局域网访问后，同一网络内的任何设备都可以访问 Clawdbot Web UI。请务必注意以下安全风险：
+⚠️ **重要提醒**：启用局域网访问后，同一网络内的任何设备都可以访问 OpenClaw Web UI。请务必注意以下安全风险：
 
 - 未经授权的用户可能访问你的 AI 助手
 - API Key 可能被滥用
@@ -277,7 +277,7 @@ disconnected (1008): control ui requires HTTPS or localhost (secure context)
 然后重启 Gateway：
 
 ```bash
-clawdbot gateway restart
+openclaw gateway restart
 ```
 
 ### Q2: 局域网无法访问
@@ -299,13 +299,13 @@ clawdbot gateway restart
 2. 确认 Gateway 已启动：
 
    ```bash
-   clawdbot gateway status
+   openclaw gateway status
    ```
 
 3. 确认 bind 配置为 `lan`：
 
    ```bash
-   grep '"bind"' ~/.clawdbot/clawdbot.json
+   grep '"bind"' ~/.openclaw/openclaw.json
    # 应输出: "bind": "lan"
    ```
 
@@ -320,7 +320,7 @@ clawdbot gateway restart
 3. 重新获取 Token：
 
    ```bash
-   grep '"token"' ~/.clawdbot/clawdbot.json
+   grep '"token"' ~/.openclaw/openclaw.json
    ```
 
 ### Q4: 配置文件语法错误
@@ -332,7 +332,7 @@ clawdbot gateway restart
 1. 验证 JSON 语法：
 
    ```bash
-   cat ~/.clawdbot/clawdbot.json | jq
+   cat ~/.openclaw/openclaw.json | jq
    ```
 
 2. 如果输出错误，修复 JSON 语法
@@ -340,7 +340,7 @@ clawdbot gateway restart
 3. 使用备份恢复（如有必要）：
 
    ```bash
-   cp ~/.clawdbot/clawdbot.json.backup ~/.clawdbot/clawdbot.json
+   cp ~/.openclaw/openclaw.json.backup ~/.openclaw/openclaw.json
    ```
 
 4. 重新编辑配置文件
@@ -369,7 +369,7 @@ clawdbot gateway restart
 然后重启 Gateway：
 
 ```bash
-clawdbot gateway restart
+openclaw gateway restart
 ```
 
 ---
@@ -388,8 +388,8 @@ clawdbot gateway restart
 
 ### 相关链接
 
-- [Clawdbot 官方文档](https://docs.clawd.bot)
-- [Clawdbot GitHub](https://github.com/clawdbot/clawdbot)
+- [OpenClaw 官方文档](https://docs.clawd.bot)
+- [OpenClaw GitHub](https://github.com/openclaw/openclaw)
 - [Tailscale 文档](https://tailscale.com/)
 
 ---
@@ -398,6 +398,6 @@ clawdbot gateway restart
 
 - 文档版本: 1.0
 - 创建日期: 2026-01-29
-- 支持的 Clawdbot 版本: 2026.1.24-3+
+- 支持的 OpenClaw 版本: 2026.1.24-3+
 
 **注意**：请妥善保管您的 Token 和 API Key，定期检查访问日志以确保安全。
