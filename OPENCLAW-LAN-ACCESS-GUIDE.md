@@ -12,9 +12,9 @@
 
 ---
 
-## 方法一：使用配置向导（推荐）
+## 方法一：使用配置向导 + 手动完善（推荐）
 
-OpenClaw 内置配置向导，可以一键开启局域网访问功能。
+OpenClaw 配置向导可以开启局域网访问，但 **无法直接配置 controlUi**。向导设置后仍需手动添加 controlUi 配置。
 
 ### 1.1 运行配置向导
 
@@ -25,10 +25,34 @@ openclaw onboard
 ### 1.2 向导操作流程
 
 1. 选择 `Enable LAN Access` 或类似选项
-2. 向导会自动配置 `bind: lan` 和 `controlUi` 相关设置
+2. 向导会自动配置 `bind: lan`
 3. 自动重启 Gateway
 
-### 1.3 验证配置
+### 1.3 手动添加 controlUi 配置
+
+向导完成后，需手动编辑配置文件添加 controlUi 设置：
+
+```bash
+nano ~/.openclaw/openclaw.json
+```
+
+在 gateway 配置中添加：
+
+```json
+"controlUi": {
+  "dangerouslyAllowHostHeaderOriginFallback": true,
+  "allowInsecureAuth": true,
+  "dangerouslyDisableDeviceAuth": true
+}
+```
+
+### 1.4 重启 Gateway
+
+```bash
+openclaw gateway restart
+```
+
+### 1.5 验证配置
 
 ```bash
 openclaw gateway status
