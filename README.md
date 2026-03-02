@@ -2,6 +2,8 @@
 
 本仓库提供 OpenClaw 配置国内版 LLM API 的快速指南，帮助用户快速将 OpenClaw 切换到国内 API 服务商。
 
+**注意**：新版本（2026.1.24+）使用配置向导，无需手动设置模型，向导会自动识别并配置可用模型。
+
 ## 支持的 API 服务商
 
 - **MiniMax**: https://www.minimaxi.com
